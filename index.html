@@ -218,7 +218,8 @@
       border: 8px solid rgba(0, 0, 0, .55);
     }
 
-    .phone-screen img {
+    .phone-screen img,
+    .phone-screen video {
       width: 100%;
       height: 100%;
       object-fit: contain;
@@ -404,6 +405,53 @@
       overflow: hidden;
       background: #000;
       border: 1px solid var(--line);
+    }
+
+    .video-carousel {
+      margin-top: 18px;
+    }
+
+    .carousel-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .carousel-counter {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .carousel-nav {
+      display: inline-flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .carousel-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 96px;
+      padding: 9px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .08);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .carousel-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(53, 245, 230, .45);
     }
 
     video {
@@ -739,12 +787,14 @@
 
       <aside class="phone-card">
         <div class="phone-screen">
-          <img src="images/fish.png" alt="Fish Yatzy">
+          <video autoplay muted loop playsinline preload="metadata" aria-label="Wonder Build gameplay">
+            <source src="videos/WonderBuild1.mp4" type="video/mp4">
+          </video>
         </div>
 
         <div class="store-row">
           <a class="store"
-            href="https://play.google.com/store/apps/details?id=com.gameogram.fishyatzy&pcampaignid=web_share"
+            href="https://play.google.com/store/apps/details?id=com.Beximo.WonderBuilder"
             target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24">
               <path fill="#35f5e6" d="M3 2l13.5 10L3 22V2z" />
@@ -752,7 +802,7 @@
             </svg>
             Google Play
           </a>
-          <a class="store" href="https://apps.apple.com/tr/app/fish-yatzy/id6535686968?l=tr" target="_blank"
+          <a class="store" href="https://apps.apple.com/tr/app/wonder-build-city-builder/id6803185511?l=tr" target="_blank"
             rel="noopener">
             <svg viewBox="0 0 24 24">
               <path fill="#fff"
@@ -763,9 +813,9 @@
         </div>
 
         <div class="stats">
+          <div class="stat">Beximo<small>My Indie Team</small></div>
+          <div class="stat">iOS + Android<small>Published</small></div>
           <div class="stat">4+<small>Years</small></div>
-          <div class="stat">Firebase<small>Analytics</small></div>
-          <div class="stat">Mobile<small>Games</small></div>
         </div>
       </aside>
     </section>
@@ -811,6 +861,23 @@
       </div>
 
       <div class="experience">
+        <div class="xp">
+          <div class="eyebrow">Beximo Games • My Independent Team</div>
+          <h4>Founder / Unity Game Developer</h4>
+          <p class="meta">
+            Building and publishing my own games with Beximo Games, my independent game team. For Wonder Build,
+            I owned the Unity development and release pipeline across gameplay, progression, Firebase, cloud save,
+            authentication, achievements, ads, IAP, Addressables, Google Play and App Store publishing, plus ongoing
+            live production and technical support.
+          </p>
+          <div class="store-row">
+            <a class="store" href="https://play.google.com/store/apps/details?id=com.Beximo.WonderBuilder"
+              target="_blank" rel="noopener">Google Play</a>
+            <a class="store" href="https://apps.apple.com/tr/app/wonder-build-city-builder/id6803185511?l=tr"
+              target="_blank" rel="noopener">App Store</a>
+          </div>
+        </div>
+
         <div class="xp">
           <div class="eyebrow">Gameogram</div>
           <h4>Unity Game Developer</h4>
@@ -932,6 +999,31 @@
     const appIcon = `<svg viewBox="0 0 24 24"><path fill="#fff" d="M16.4 13.1c0-2.2 1.8-3.3 1.9-3.4-1.1-1.5-2.7-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.5 0-2.9.9-3.7 2.2-1.6 2.8-.4 7 1.1 9.2.8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.2-2.5 1.2-2.6 0 0-2.6-1-2.6-3.7zM14.2 6.5c.6-.8 1.1-1.8 1-2.9-1 .1-2 .7-2.7 1.5-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.3z"/></svg>`;
 
     const published = [
+      {
+        title: "Wonder Build",
+        category: "Mobile Casual / Physics City Builder",
+        company: "Beximo Games — My independent game team",
+        content: "Created and published Wonder Build under Beximo Games, my own independent game team. I handled the Unity development and production pipeline end-to-end, including gameplay systems, progression, Firebase services, cloud save, Google Play Games / Game Center integration, achievements, AdMob, Unity IAP, Addressables, Android Play Asset Delivery, iOS release work and live production support.",
+        image: "images/WonderBuild.png",
+        videos: ["videos/WonderBuild1.mp4", "videos/WonderBuild2.mp4", "videos/WonderBuild3.mp4"],
+        play: "https://play.google.com/store/apps/details?id=com.Beximo.WonderBuilder",
+        app: "https://apps.apple.com/tr/app/wonder-build-city-builder/id6803185511?l=tr",
+        tags: [
+          "Unity",
+          "C#",
+          "Beximo Games",
+          "Indie Team",
+          "Firebase",
+          "Cloud Save",
+          "AdMob",
+          "Unity IAP",
+          "Addressables",
+          "Google Play Games",
+          "Game Center",
+          "iOS",
+          "Android"
+        ]
+      },
       {
         title: "Fish Yatzy",
         category: "Mobile Board / Dice Game",
@@ -1075,8 +1167,30 @@
       return `<div class="tags">${g.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>`;
     }
 
-    function video(src) {
-      return src ? `<div class="video-box"><video controls preload="metadata" src="${src}"></video></div>` : "";
+    function renderVideoSection(g, key) {
+      const videos = Array.isArray(g.videos) && g.videos.length
+        ? g.videos
+        : (g.video ? [g.video] : []);
+
+      if (!videos.length) return "";
+
+      if (videos.length === 1) {
+        return `<div class="video-box"><video controls preload="metadata" playsinline src="${videos[0]}"></video></div>`;
+      }
+
+      return `
+      <div class="video-carousel" data-carousel="${key}" data-videos='${JSON.stringify(videos)}'>
+        <div class="carousel-toolbar">
+          <div class="carousel-counter"><span class="current-video">1</span> / <span class="total-video">${videos.length}</span> videos</div>
+          <div class="carousel-nav">
+            <button class="carousel-btn" type="button" data-action="prev">◀ Prev</button>
+            <button class="carousel-btn" type="button" data-action="next">Next ▶</button>
+          </div>
+        </div>
+        <div class="video-box">
+          <video controls preload="metadata" playsinline src="${videos[0]}"></video>
+        </div>
+      </div>`;
     }
 
     function poster(g) {
@@ -1099,7 +1213,7 @@
   `;
     }
 
-    function publishedCard(g) {
+    function publishedCard(g, index) {
       return `
     <article class="card">
       ${poster(g)}
@@ -1107,16 +1221,16 @@
       <h4>${g.title}</h4>
       <p class="meta"><b>Company:</b> ${g.company}<br><b>Contribution:</b> ${g.content}</p>
       ${storeButtons(g)}
-      ${video(g.video)}
+      ${renderVideoSection(g, `published-${index}`)}
       ${tags(g)}
     </article>
   `;
     }
 
-    function otherCard(g) {
+    function otherCard(g, index) {
       return `
     <article class="card">
-      ${video(g.video)}
+      ${renderVideoSection(g, `other-${index}`)}
       <div class="label">${g.category}</div>
       <h4>${g.title}</h4>
       <p class="meta"><b>Company:</b> ${g.company}<br><b>Contribution:</b> ${g.content}</p>
@@ -1159,8 +1273,64 @@
       document.body.removeChild(area);
     }
 
-    document.getElementById("publishedCards").innerHTML = published.map(publishedCard).join("");
-    document.getElementById("otherCards").innerHTML = other.map(otherCard).join("");
+    function initVideoCarousels() {
+      document.querySelectorAll(".video-carousel").forEach((carousel) => {
+        const video = carousel.querySelector("video");
+        const currentLabel = carousel.querySelector(".current-video");
+        const videos = JSON.parse(carousel.dataset.videos || "[]");
+        if (!video || !videos.length) return;
+
+        let index = 0;
+        let isSwitching = false;
+
+        const playSafely = () => {
+          const playPromise = video.play();
+          if (playPromise && typeof playPromise.catch === "function") {
+            playPromise.catch(() => {});
+          }
+        };
+
+        const loadVideo = (nextIndex, autoplay = true) => {
+          index = (nextIndex + videos.length) % videos.length;
+          isSwitching = true;
+          video.src = videos[index];
+          video.load();
+          currentLabel.textContent = String(index + 1);
+
+          const onReady = () => {
+            if (autoplay) playSafely();
+            isSwitching = false;
+            video.removeEventListener("canplay", onReady);
+          };
+
+          video.addEventListener("canplay", onReady);
+        };
+
+        const advance = () => {
+          if (isSwitching) return;
+          loadVideo(index + 1, true);
+        };
+
+        carousel.querySelector('[data-action="prev"]')?.addEventListener("click", () => loadVideo(index - 1, true));
+        carousel.querySelector('[data-action="next"]')?.addEventListener("click", () => loadVideo(index + 1, true));
+
+        video.addEventListener("ended", advance);
+
+        // Small workaround for export glitches on the very last frames:
+        // jump to the next clip just before the broken tail frame becomes visible.
+        video.addEventListener("timeupdate", () => {
+          if (isSwitching) return;
+          if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+          if (video.duration - video.currentTime <= 0.08) {
+            advance();
+          }
+        });
+      });
+    }
+
+    document.getElementById("publishedCards").innerHTML = published.map((g, i) => publishedCard(g, i)).join("");
+    document.getElementById("otherCards").innerHTML = other.map((g, i) => otherCard(g, i)).join("");
+    initVideoCarousels();
   </script>
 </body>
 
