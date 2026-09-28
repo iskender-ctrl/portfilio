@@ -4,1035 +4,2581 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>İskender Sivaz | Unity Game Developer</title>
+
+  <meta
+    name="description"
+    content="Unity Game Developer with 4+ years of experience in published mobile games, multiplayer systems, Firebase, monetization, backend integrations and production systems."
+  >
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
     :root {
-      --bg: #06101e;
-      --panel: #111d2d;
-      --line: rgba(255, 255, 255, .13);
-      --text: #f4f8ff;
-      --muted: #a9b8cf;
-      --cyan: #35f5e6;
-      --green: #50ffad;
-      --yellow: #ffd45c;
-      --radius: 28px;
+      --bg: #020304;
+      --bg-soft: #070a0e;
+
+      --panel: rgba(14, 18, 24, .88);
+      --panel-light: rgba(22, 28, 36, .78);
+
+      --line: rgba(255, 255, 255, .08);
+      --line-strong: rgba(255, 255, 255, .14);
+
+      --text: #f2f6fa;
+      --muted: #98a4b2;
+
+      --cyan: #6be8df;
+      --green: #77efb9;
+      --blue: #6a9fff;
+      --yellow: #f6d272;
+
+      --radius: 26px;
     }
 
     * {
-      box-sizing: border-box
+      box-sizing: border-box;
     }
 
     html {
-      scroll-behavior: smooth
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
-      background:
-        radial-gradient(circle at 8% 8%, #14647c 0, #06101e 30%),
-        radial-gradient(circle at 92% 10%, #0a654f 0, #06101e 32%),
-        linear-gradient(180deg, #06101e, #030914);
+
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 8% 4%,
+          rgba(20, 105, 125, .27),
+          transparent 27%
+        ),
+        radial-gradient(
+          circle at 88% 8%,
+          rgba(18, 102, 72, .18),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 65% 70%,
+          rgba(44, 69, 120, .10),
+          transparent 35%
+        ),
+        linear-gradient(
+          180deg,
+          #05070a 0%,
+          #020304 52%,
+          #070a0e 100%
+        );
+
       overflow-x: hidden;
     }
 
-    body:before {
+    body::before {
       content: "";
+
       position: fixed;
       inset: 0;
+
       pointer-events: none;
+
       background-image:
-        linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, #000, transparent 92%);
+        linear-gradient(
+          rgba(255, 255, 255, .018) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, .018) 1px,
+          transparent 1px
+        );
+
+      background-size: 58px 58px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, .85),
+          transparent 92%
+        );
+    }
+
+    body::after {
+      content: "";
+
+      position: fixed;
+
+      width: 520px;
+      height: 520px;
+
+      right: -240px;
+      top: 300px;
+
+      background:
+        rgba(70, 210, 190, .07);
+
+      filter:
+        blur(130px);
+
+      border-radius: 50%;
+
+      pointer-events: none;
     }
 
     a {
       color: inherit;
-      text-decoration: none
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
     }
 
     .wrap {
-      width: min(1180px, 92vw);
-      margin: auto
+      width: min(1200px, 92vw);
+      margin: auto;
     }
+
+
+    /* ==============================
+       NAV
+    ============================== */
 
     .nav {
       position: sticky;
-      top: 16px;
-      z-index: 20;
-      margin: 16px auto 0;
-      width: min(1180px, 92vw);
+
+      top: 14px;
+
+      z-index: 50;
+
+      width: min(1200px, 92vw);
+
+      margin: 14px auto 0;
+
+      padding: 12px 18px;
+
       display: flex;
-      justify-content: space-between;
+
       align-items: center;
-      gap: 14px;
-      padding: 14px 20px;
-      background: rgba(6, 16, 30, .82);
+
+      justify-content: space-between;
+
+      gap: 20px;
+
       border: 1px solid var(--line);
-      border-radius: 22px;
-      backdrop-filter: blur(18px);
-      box-shadow: 0 22px 80px rgba(0, 0, 0, .3);
+
+      border-radius: 18px;
+
+      background:
+        rgba(4, 7, 10, .80);
+
+      backdrop-filter:
+        blur(20px);
+
+      box-shadow:
+        0 20px 80px rgba(0, 0, 0, .32);
     }
 
     .logo {
-      font-size: 25px;
+      font-size: 24px;
       font-weight: 900;
-      white-space: nowrap
+
+      letter-spacing: -1px;
+
+      white-space: nowrap;
     }
 
     .logo span {
-      color: var(--green)
+      color: var(--green);
     }
 
     .navlinks {
       display: flex;
-      gap: 18px;
-      font-weight: 900;
-      font-size: 13px;
+
       align-items: center;
-      flex-wrap: wrap;
+
       justify-content: flex-end;
+
+      gap: 20px;
+
+      flex-wrap: wrap;
+
+      font-size: 13px;
+
+      font-weight: 700;
     }
 
     .navlinks a {
-      padding: 8px 0;
-      white-space: nowrap;
+      color: #c3ccd6;
+
+      transition: .2s;
     }
 
     .navlinks a:hover {
-      color: var(--green)
+      color: var(--green);
     }
+
+
+    /* ==============================
+       HERO
+    ============================== */
 
     .hero {
       min-height: 88vh;
+
+      padding: 80px 0;
+
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 430px;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        420px;
+
+      gap: 90px;
+
       align-items: center;
-      gap: 80px;
-      padding: 72px 0 76px;
     }
 
     .chip {
       display: inline-flex;
-      gap: 9px;
+
       align-items: center;
-      padding: 10px 14px;
+
+      gap: 9px;
+
+      padding: 9px 13px;
+
       border: 1px solid var(--line);
+
       border-radius: 999px;
-      background: rgba(255, 255, 255, .08);
-      color: #dfe8f6;
-      font-weight: 900;
-      font-size: 13px;
+
+      background:
+        rgba(255, 255, 255, .035);
+
+      color: #cbd5df;
+
+      font-size: 12px;
+
+      font-weight: 700;
     }
 
     .dot {
-      width: 9px;
-      height: 9px;
+      width: 8px;
+      height: 8px;
+
       border-radius: 50%;
+
       background: var(--green);
-      box-shadow: 0 0 18px var(--green);
+
+      box-shadow:
+        0 0 16px var(--green);
     }
 
     h1 {
-      font-size: clamp(52px, 7vw, 104px);
+      margin: 26px 0 16px;
+
+      font-size:
+        clamp(
+          56px,
+          7.5vw,
+          106px
+        );
+
       line-height: .86;
-      margin: 26px 0 14px;
-      letter-spacing: -5px;
+
+      letter-spacing: -6px;
     }
 
     .gradient {
-      background: linear-gradient(90deg, #70e8ff, var(--green));
+      background:
+        linear-gradient(
+          90deg,
+          #9de7ff,
+          #74efc8
+        );
+
       -webkit-background-clip: text;
+
       background-clip: text;
+
       color: transparent;
     }
 
     h2 {
-      font-size: clamp(30px, 3vw, 46px);
-      margin: 0;
+      margin: 0 0 18px;
+
+      font-size:
+        clamp(
+          27px,
+          3vw,
+          43px
+        );
+
+      letter-spacing: -1.5px;
+
       color: var(--yellow);
     }
 
     .lead {
-      font-size: 19px;
-      line-height: 1.7;
+      max-width: 720px;
+
+      margin: 0;
+
       color: var(--muted);
-      max-width: 690px;
+
+      font-size: 18px;
+
+      line-height: 1.75;
     }
 
+    .hero-actions {
+      display: flex;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+      margin-top: 28px;
+    }
+
+
+    /* ==============================
+       BUTTONS
+    ============================== */
+
     .btn {
+      min-height: 48px;
+
       display: inline-flex;
+
       align-items: center;
+
       justify-content: center;
-      gap: 9px;
-      margin: 18px 10px 0 0;
-      padding: 15px 21px;
+
+      padding: 0 20px;
+
       border: 1px solid var(--line);
-      border-radius: 15px;
-      background: rgba(255, 255, 255, .09);
-      font-weight: 900;
-      transition: .25s;
-      cursor: pointer;
+
+      border-radius: 13px;
+
+      background:
+        rgba(255, 255, 255, .05);
+
       color: var(--text);
-      font-family: inherit;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      transition:
+        transform .2s,
+        border-color .2s,
+        background .2s;
     }
 
     .btn:hover {
-      transform: translateY(-3px);
-      border-color: rgba(53, 245, 230, .45);
+      transform:
+        translateY(-3px);
+
+      border-color:
+        rgba(101, 232, 223, .35);
+
+      background:
+        rgba(255, 255, 255, .075);
     }
 
     .btn.primary {
-      background: linear-gradient(135deg, var(--cyan), var(--green));
-      color: #03101b;
       border: 0;
-      box-shadow: 0 18px 60px rgba(53, 245, 230, .22);
+
+      color: #03110e;
+
+      background:
+        linear-gradient(
+          135deg,
+          #75efe0,
+          #72f2b5
+        );
+
+      box-shadow:
+        0 16px 45px
+        rgba(82, 228, 190, .14);
     }
 
+
+    /* ==============================
+       HERO PHONE
+    ============================== */
+
     .phone-card {
-      transform: rotate(-2deg);
-      padding: 18px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, .14), rgba(255, 255, 255, .05));
+      padding: 16px;
+
       border: 1px solid var(--line);
-      border-radius: 36px;
-      box-shadow: 0 40px 100px rgba(0, 0, 0, .35);
+
+      border-radius: 32px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, .075),
+          rgba(255, 255, 255, .025)
+        );
+
+      box-shadow:
+        0 35px 100px
+        rgba(0, 0, 0, .42);
+
+      transform:
+        rotate(-1.5deg);
+
       transition: .35s;
     }
 
     .phone-card:hover {
-      transform: rotate(0deg) translateY(-8px);
+      transform:
+        rotate(0deg)
+        translateY(-6px);
     }
 
     .phone-screen {
-      height: 680px;
-      border-radius: 24px;
+      height: 650px;
+
+      border: 7px solid #020304;
+
+      border-radius: 22px;
+
       overflow: hidden;
+
       background: #000;
-      border: 8px solid rgba(0, 0, 0, .55);
     }
 
-    .phone-screen img,
     .phone-screen video {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      object-position: center;
+
       display: block;
+
+      object-fit: contain;
+
       background: #000;
     }
 
+
+    /* ==============================
+       STORE BADGES
+    ============================== */
+
     .store-row {
       display: flex;
-      gap: 10px;
+
       flex-wrap: wrap;
-      margin: 15px 0 0;
+
+      align-items: center;
+
+      gap: 10px;
+
+      margin-top: 15px;
     }
 
     .store {
       display: inline-flex;
+
       align-items: center;
-      gap: 8px;
-      padding: 10px 12px;
-      border-radius: 11px;
-      background: rgba(0, 0, 0, .35);
-      border: 1px solid var(--line);
-      font-size: 13px;
-      font-weight: 900;
+
+      justify-content: center;
+
       transition: .2s;
+
+      border-radius: 9px;
     }
 
     .store:hover {
-      border-color: var(--cyan);
-      transform: translateY(-2px);
+      transform:
+        translateY(-3px);
+
+      filter:
+        brightness(1.08);
     }
 
-    .store svg {
-      width: 18px;
-      height: 18px;
+    .store img {
       display: block;
-      flex: 0 0 18px;
+
+      width: auto;
+
+      height: 42px;
+
+      object-fit: contain;
     }
+
+
+    /* ==============================
+       HERO STATS
+    ============================== */
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 15px;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 8px;
+
+      margin-top: 14px;
     }
 
     .stat {
+      padding: 13px 8px;
+
       text-align: center;
-      background: rgba(255, 255, 255, .08);
-      border-radius: 15px;
-      padding: 14px;
-      font-weight: 900;
+
+      border: 1px solid var(--line);
+
+      border-radius: 13px;
+
+      background:
+        rgba(255, 255, 255, .035);
+
+      font-size: 13px;
+
+      font-weight: 800;
     }
 
     .stat small {
       display: block;
+
+      margin-top: 3px;
+
       color: var(--muted);
-      font-size: 11px;
+
+      font-size: 10px;
+
+      font-weight: 600;
     }
 
+
+    /* ==============================
+       SECTIONS
+    ============================== */
+
     .section {
-      padding: 78px 0;
-      scroll-margin-top: 95px;
+      padding: 82px 0;
+
+      scroll-margin-top: 100px;
     }
 
     .section-head {
       display: flex;
-      align-items: end;
+
+      align-items: flex-end;
+
       justify-content: space-between;
-      gap: 30px;
-      margin-bottom: 28px;
+
+      gap: 40px;
+
+      margin-bottom: 30px;
     }
 
     .section-head .muted {
-      max-width: 650px
+      max-width: 620px;
     }
 
     .eyebrow {
       color: var(--green);
+
+      font-size: 11px;
+
       font-weight: 900;
-      letter-spacing: .2em;
-      font-size: 13px;
+
+      letter-spacing: .22em;
+
       text-transform: uppercase;
     }
 
-    .section h3 {
-      font-size: clamp(38px, 5vw, 68px);
+    .section h3,
+    .foot h3 {
+      margin: 7px 0 0;
+
+      font-size:
+        clamp(
+          38px,
+          5vw,
+          66px
+        );
+
       line-height: .95;
-      margin: 8px 0 0;
+
       letter-spacing: -3px;
     }
 
     .muted {
       color: var(--muted);
-      line-height: 1.65;
+
+      line-height: 1.7;
     }
+
+
+    /* ==============================
+       PROJECT CARDS
+    ============================== */
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 22px;
     }
 
     .card {
       position: relative;
+
       overflow: hidden;
-      background: linear-gradient(180deg, rgba(22, 36, 55, .95), rgba(17, 29, 45, .92));
+
+      padding: 18px;
+
       border: 1px solid var(--line);
+
       border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: 0 30px 90px rgba(0, 0, 0, .22);
-      transition: .35s;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(20, 26, 34, .91),
+          rgba(10, 14, 19, .93)
+        );
+
+      box-shadow:
+        0 22px 75px
+        rgba(0, 0, 0, .25);
+
+      transition: .3s;
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(53, 245, 230, .38);
+      transform:
+        translateY(-6px);
+
+      border-color:
+        rgba(101, 232, 223, .26);
     }
 
-    .card:before {
+    .card::before {
       content: "";
+
       position: absolute;
-      inset: -2px;
-      background: radial-gradient(circle at 20% 0, rgba(53, 245, 230, .18), transparent 30%);
+
+      left: -120px;
+      top: -160px;
+
+      width: 380px;
+      height: 380px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(67, 205, 188, .07);
+
+      filter:
+        blur(70px);
+
       pointer-events: none;
     }
 
     .poster {
-      height: 360px;
-      border-radius: 20px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #07111d, #112236);
-      border: 1px solid var(--line);
       position: relative;
+
+      height: 340px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
+      overflow: hidden;
+
+      border: 1px solid var(--line);
+
+      border-radius: 18px;
+
+      background: #030506;
     }
 
     .poster img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      object-position: center;
+
       display: block;
-      background: #050b14;
+
+      object-fit: cover;
+
+      object-position: center;
     }
 
     .badge {
       position: absolute;
-      left: 16px;
-      top: 16px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, .68);
-      font-size: 12px;
-      font-weight: 900;
-    }
 
-    .card h4 {
-      font-size: 31px;
-      margin: 12px 0 8px;
+      top: 13px;
+      left: 13px;
+
+      padding: 7px 10px;
+
+      border: 1px solid
+        rgba(255, 255, 255, .10);
+
+      border-radius: 999px;
+
+      background:
+        rgba(0, 0, 0, .72);
+
+      backdrop-filter:
+        blur(10px);
+
+      font-size: 11px;
+
+      font-weight: 800;
     }
 
     .label {
-      color: var(--green);
-      font-weight: 900;
-      letter-spacing: .15em;
-      font-size: 12px;
-      text-transform: uppercase;
       margin-top: 18px;
+
+      color: var(--green);
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      letter-spacing: .14em;
+
+      text-transform: uppercase;
+    }
+
+    .card h4 {
+      margin: 7px 0 8px;
+
+      font-size: 29px;
+
+      letter-spacing: -1px;
     }
 
     .meta {
       color: var(--muted);
-      line-height: 1.6;
+
+      font-size: 14px;
+
+      line-height: 1.7;
     }
+
+    .meta b {
+      color: #d8e0ea;
+
+      font-weight: 700;
+    }
+
+
+    /* ==============================
+       VIDEO
+    ============================== */
 
     .video-box {
-      margin-top: 18px;
-      border-radius: 18px;
+      margin-top: 17px;
+
       overflow: hidden;
+
+      border: 1px solid var(--line);
+
+      border-radius: 16px;
+
       background: #000;
-      border: 1px solid var(--line);
-    }
-
-    .video-carousel {
-      margin-top: 18px;
-    }
-
-    .carousel-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-    }
-
-    .carousel-counter {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .carousel-nav {
-      display: inline-flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .carousel-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 96px;
-      padding: 9px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, .08);
-      color: var(--text);
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 900;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .carousel-btn:hover {
-      transform: translateY(-2px);
-      border-color: rgba(53, 245, 230, .45);
     }
 
     video {
       width: 100%;
-      height: auto;
+
       display: block;
-      object-fit: contain;
+
       background: #000;
     }
 
-    .tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+    .video-carousel {
       margin-top: 17px;
     }
 
-    .tag {
-      padding: 8px 11px;
-      border-radius: 999px;
-      background: var(--yellow);
-      color: #07111d;
-      font-size: 12px;
-      font-weight: 900;
+    .carousel-toolbar {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 10px;
+
+      margin-bottom: 9px;
     }
+
+    .carousel-counter {
+      color: var(--muted);
+
+      font-size: 12px;
+
+      font-weight: 700;
+    }
+
+    .carousel-nav {
+      display: flex;
+
+      gap: 7px;
+    }
+
+    .carousel-btn {
+      padding: 8px 11px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 10px;
+
+      background:
+        rgba(255, 255, 255, .045);
+
+      color: var(--text);
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      transition: .2s;
+    }
+
+    .carousel-btn:hover {
+      background:
+        rgba(255, 255, 255, .08);
+
+      border-color:
+        rgba(101, 232, 223, .30);
+    }
+
+
+    /* ==============================
+       TAGS
+    ============================== */
+
+    .tags {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 7px;
+
+      margin-top: 16px;
+    }
+
+    .tag {
+      padding: 7px 10px;
+
+      border: 1px solid
+        rgba(255, 255, 255, .08);
+
+      border-radius: 999px;
+
+      background:
+        rgba(255, 255, 255, .05);
+
+      color: #cad4df;
+
+      font-size: 11px;
+
+      font-weight: 700;
+    }
+
+
+    /* ==============================
+       EXPERIENCE
+    ============================== */
 
     .experience {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 1fr)
+        );
+
+      gap: 18px;
     }
 
     .xp {
-      padding: 28px;
-      background: rgba(255, 255, 255, .08);
+      padding: 24px;
+
       border: 1px solid var(--line);
-      border-radius: 24px;
+
+      border-radius: 21px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, .045),
+          rgba(255, 255, 255, .018)
+        );
+
       transition: .25s;
     }
 
     .xp:hover {
-      transform: translateY(-5px);
-      border-color: rgba(53, 245, 230, .35);
+      transform:
+        translateY(-4px);
+
+      border-color:
+        rgba(101, 232, 223, .24);
     }
 
     .xp h4 {
-      font-size: 24px;
-      margin: 10px 0;
+      margin: 9px 0;
+
+      font-size: 22px;
+
+      letter-spacing: -.5px;
+    }
+
+
+    /* ==============================
+       SKILLS
+    ============================== */
+
+    .skills-layout {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 18px;
+
+      margin-top: 28px;
+    }
+
+    .skill-group {
+      padding: 24px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, .045),
+          rgba(255, 255, 255, .018)
+        );
+    }
+
+    .skill-group-title {
+      margin-bottom: 16px;
+
+      color: #eef3f8;
+
+      font-size: 17px;
+
+      font-weight: 800;
     }
 
     .skills {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 9px;
     }
 
     .skill {
-      text-align: center;
-      padding: 18px;
-      background: rgba(255, 255, 255, .09);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      font-weight: 900;
+      padding: 9px 12px;
+
+      border: 1px solid
+        rgba(255, 255, 255, .08);
+
+      border-radius: 10px;
+
+      background:
+        rgba(255, 255, 255, .04);
+
+      color: #bdc8d4;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      transition: .2s;
     }
 
+    .skill:hover {
+      color: #ecfffb;
+
+      border-color:
+        rgba(117, 239, 182, .28);
+
+      background:
+        rgba(117, 239, 182, .065);
+
+      transform:
+        translateY(-2px);
+    }
+
+
+    /* ==============================
+       CONTACT
+    ============================== */
+
     .foot {
-      padding: 60px 0 86px;
+      padding:
+        80px 0
+        100px;
+
       text-align: center;
+    }
+
+    .foot .muted {
+      margin:
+        16px auto 0;
+
+      max-width: 640px;
+    }
+
+    .email-box {
+      width:
+        min(
+          520px,
+          100%
+        );
+
+      margin:
+        22px auto 0;
+
+      padding:
+        14px 16px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 13px;
+
+      background:
+        rgba(255, 255, 255, .035);
+
+      color: #b8c3cf;
+
+      font-weight: 700;
+
+      word-break: break-all;
     }
 
     .contact-actions {
       display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
 
-    .email-box {
-      margin: 18px auto 0;
-      width: min(520px, 100%);
-      padding: 14px 16px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, .07);
-      color: var(--muted);
-      font-weight: 800;
-      word-break: break-all;
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      margin-top: 15px;
     }
 
     .copy-status {
-      min-height: 22px;
+      min-height: 20px;
+
       margin-top: 10px;
+
       color: var(--green);
-      font-weight: 900;
+
+      font-size: 12px;
+
+      font-weight: 700;
     }
 
-    @media(max-width:1100px) {
+
+    /* ==============================
+       RESPONSIVE
+    ============================== */
+
+    @media (max-width: 1100px) {
+
       .hero {
-        grid-template-columns: 1fr 370px;
-        gap: 46px;
+        grid-template-columns:
+          minmax(0, 1fr)
+          360px;
+
+        gap: 50px;
       }
 
       .phone-screen {
-        height: 600px
+        height: 570px;
       }
 
       .experience {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
       }
+
     }
 
-    @media(max-width:900px) {
+
+    @media (max-width: 900px) {
+
       .nav {
         top: 8px;
+
         flex-direction: column;
+
         align-items: flex-start;
-        padding: 14px 16px;
       }
 
       .navlinks {
-        width: 100%;
-        justify-content: flex-start;
         gap: 8px;
       }
 
       .navlinks a {
-        font-size: 12px;
-        padding: 8px 10px;
-        background: rgba(255, 255, 255, .06);
-        border: 1px solid rgba(255, 255, 255, .08);
+        padding: 7px 10px;
+
+        border: 1px solid var(--line);
+
         border-radius: 999px;
+
+        background:
+          rgba(255, 255, 255, .025);
       }
 
       .hero {
         grid-template-columns: 1fr;
-        gap: 34px;
-        padding-top: 46px;
+
+        gap: 42px;
+
+        padding-top: 55px;
       }
 
       .phone-card {
-        max-width: 420px;
+        width:
+          min(
+            420px,
+            100%
+          );
+
         margin: auto;
+
         transform: none;
       }
 
       .phone-card:hover {
-        transform: translateY(-4px);
+        transform:
+          translateY(-4px);
       }
 
       .cards,
-      .experience {
+      .experience,
+      .skills-layout {
         grid-template-columns: 1fr;
-      }
-
-      .skills {
-        grid-template-columns: repeat(2, 1fr);
       }
 
       .section-head {
         display: block;
       }
 
-      .phone-screen {
-        height: 620px
+      .section-head .muted {
+        margin-top: 16px;
       }
 
       h1 {
-        letter-spacing: -3px
+        letter-spacing: -4px;
       }
 
-      .poster {
-        height: 330px
-      }
     }
 
-    @media(max-width:520px) {
+
+    @media (max-width: 520px) {
 
       .wrap,
       .nav {
-        width: min(94vw, 1180px)
+        width: 94vw;
       }
 
       .navlinks {
+        width: 100%;
+
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
+
+        grid-template-columns:
+          repeat(3, 1fr);
       }
 
       .navlinks a {
         text-align: center;
-        font-size: 11px;
-        padding: 8px 6px;
+
+        font-size: 10px;
       }
 
       .hero {
-        padding: 34px 0 46px
+        padding:
+          38px 0
+          50px;
       }
 
-      .chip {
-        font-size: 11px
+      h1 {
+        letter-spacing: -3px;
       }
 
       .lead {
-        font-size: 16px
+        font-size: 15px;
+      }
+
+      .hero-actions {
+        display: grid;
       }
 
       .btn {
         width: 100%;
-        margin-right: 0;
       }
 
       .phone-card {
-        padding: 12px;
-        border-radius: 28px;
+        padding: 11px;
       }
 
       .phone-screen {
-        height: 520px;
-        border-width: 6px;
+        height: 510px;
       }
 
-      .store-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .store {
-        justify-content: center;
-        font-size: 12px;
-        padding: 10px 8px;
+      .store img {
+        height: 37px;
       }
 
       .stats {
-        grid-template-columns: 1fr 1fr 1fr;
+        gap: 6px;
       }
 
       .stat {
-        padding: 10px;
-        font-size: 13px;
+        padding: 10px 5px;
+
+        font-size: 11px;
+      }
+
+      .poster {
+        height: 265px;
       }
 
       .section {
-        padding: 54px 0
-      }
-
-      .section h3 {
-        letter-spacing: -2px
+        padding: 58px 0;
       }
 
       .card {
-        padding: 16px;
-        border-radius: 22px;
-      }
-
-      .poster {
-        height: 280px
+        padding: 14px;
       }
 
       .card h4 {
-        font-size: 26px
+        font-size: 25px;
       }
 
-      .experience {
-        gap: 14px
+      .xp,
+      .skill-group {
+        padding: 19px;
       }
 
-      .xp {
-        padding: 20px
+      .carousel-toolbar {
+        align-items: flex-start;
+
+        flex-direction: column;
       }
 
-      .skills {
-        gap: 10px
-      }
-
-      .skill {
-        padding: 14px 10px;
-        font-size: 13px;
-      }
-
-      .contact-actions {
-        display: grid;
-        grid-template-columns: 1fr;
-      }
     }
 
-    @media(max-width:380px) {
+
+    @media (max-width: 380px) {
+
       .navlinks {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns:
+          repeat(2, 1fr);
       }
 
       .phone-screen {
-        height: 460px
+        height: 455px;
       }
 
       .poster {
-        height: 240px
+        height: 225px;
       }
 
-      .store-row {
-        grid-template-columns: 1fr
+      .store img {
+        height: 34px;
       }
+
     }
+
   </style>
 </head>
 
+
 <body>
+
+
+  <!-- ==============================
+       NAV
+  ============================== -->
+
   <nav class="nav">
-    <div class="logo">is<span>.dev</span></div>
-    <div class="navlinks">
-      <a href="#published">Published</a>
-      <a href="#other">Other Work</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
+
+    <div class="logo">
+      is<span>.dev</span>
     </div>
+
+    <div class="navlinks">
+
+      <a href="#published">
+        Published
+      </a>
+
+      <a href="#other">
+        Other Work
+      </a>
+
+      <a href="#experience">
+        Experience
+      </a>
+
+      <a href="#skills">
+        Skills
+      </a>
+
+      <a href="#contact">
+        Contact
+      </a>
+
+    </div>
+
   </nav>
 
+
   <main class="wrap">
+
+
+    <!-- ==============================
+         HERO
+    ============================== -->
+
     <section class="hero">
+
+
       <div>
-        <span class="chip"><i class="dot"></i>Unity • C# • Mobile Games</span>
-        <h1>İskender <span class="gradient">Sivaz</span></h1>
-        <h2>Unity Game Developer</h2>
+
+        <span class="chip">
+
+          <i class="dot"></i>
+
+          Unity • C# • Mobile • Netcode • Multiplayer
+
+        </span>
+
+
+        <h1>
+
+          İskender
+
+          <span class="gradient">
+            Sivaz
+          </span>
+
+        </h1>
+
+
+        <h2>
+          Unity Game Developer
+        </h2>
+
+
         <p class="lead">
-          I am a Unity Game Developer with 4+ years of experience building published mobile games,
-          multiplayer systems, mobile projects, VR experiences and backend-integrated gameplay features
-          using Firebase, GameAnalytics, AdMob, Node.js and AWS.
+
+          Unity Game Developer with 4+ years of production experience
+          building and publishing mobile games, multiplayer systems,
+          gameplay features and backend-connected services.
+
+          Experienced with Unity 6, C#, Netcode for GameObjects,
+          Unity Transport, Photon, Firebase, Firestore, cloud save,
+          authentication, analytics, monetization, Addressables,
+          Google Play Games, Game Center and Android / iOS publishing.
+
         </p>
-        <a class="btn primary" href="#published">View Published Games</a>
-        <a class="btn" href="#contact">Contact Me</a>
+
+
+        <div class="hero-actions">
+
+          <a
+            class="btn primary"
+            href="#published">
+
+            View Published Games
+
+          </a>
+
+
+          <a
+            class="btn"
+            href="#contact">
+
+            Contact Me
+
+          </a>
+
+        </div>
+
+
       </div>
+
+
+      <!-- WONDER BUILD HERO -->
 
       <aside class="phone-card">
+
+
         <div class="phone-screen">
-          <video autoplay muted loop playsinline preload="metadata" aria-label="Wonder Build gameplay">
-            <source src="videos/WonderBuild1.mp4" type="video/mp4">
+
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-label="Wonder Build gameplay">
+
+            <source
+              src="videos/WonderBuild1.mp4"
+              type="video/mp4">
+
           </video>
+
         </div>
+
 
         <div class="store-row">
-          <a class="store"
+
+
+          <a
+            class="store"
             href="https://play.google.com/store/apps/details?id=com.Beximo.WonderBuilder"
-            target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24">
-              <path fill="#35f5e6" d="M3 2l13.5 10L3 22V2z" />
-              <path fill="#ffd45c" d="M16.5 12L20 14.6c1.3-1 1.3-4.2 0-5.2L16.5 12z" />
-            </svg>
-            Google Play
-          </a>
-          <a class="store" href="https://apps.apple.com/tr/app/wonder-build-city-builder/id6803185511?l=tr" target="_blank"
+            target="_blank"
             rel="noopener">
-            <svg viewBox="0 0 24 24">
-              <path fill="#fff"
-                d="M16.4 13.1c0-2.2 1.8-3.3 1.9-3.4-1.1-1.5-2.7-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.5 0-2.9.9-3.7 2.2-1.6 2.8-.4 7 1.1 9.2.8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.2-2.5 1.2-2.6 0 0-2.6-1-2.6-3.7zM14.2 6.5c.6-.8 1.1-1.8 1-2.9-1 .1-2 .7-2.7 1.5-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.3z" />
-            </svg>
-            App Store
+
+            <img
+              src="images/GetItOnGooglePlay_Badge_Web_color_English.png"
+              alt="Get it on Google Play">
+
           </a>
+
+
+          <a
+            class="store"
+            href="https://apps.apple.com/tr/app/wonder-build-city-builder/id6803185511?l=tr"
+            target="_blank"
+            rel="noopener">
+
+            <img
+              src="images/appstore.png"
+              alt="Download on the App Store">
+
+          </a>
+
+
         </div>
+
 
         <div class="stats">
-          <div class="stat">Beximo<small>My Indie Team</small></div>
-          <div class="stat">iOS + Android<small>Published</small></div>
-          <div class="stat">4+<small>Years</small></div>
+
+
+          <div class="stat">
+
+            Beximo Games
+
+            <small>
+              Independent Team
+            </small>
+
+          </div>
+
+
+          <div class="stat">
+
+            iOS + Android
+
+            <small>
+              Published
+            </small>
+
+          </div>
+
+
+          <div class="stat">
+
+            4+
+
+            <small>
+              Years Experience
+            </small>
+
+          </div>
+
+
         </div>
+
+
       </aside>
+
+
     </section>
 
-    <section class="section" id="published">
+
+
+    <!-- ==============================
+         PUBLISHED
+    ============================== -->
+
+    <section
+      class="section"
+      id="published">
+
+
       <div class="section-head">
+
+
         <div>
-          <div class="eyebrow">Published Games</div>
-          <h3>Store Projects</h3>
+
+          <div class="eyebrow">
+            Published Games
+          </div>
+
+          <h3>
+            Store Projects
+          </h3>
+
         </div>
+
+
         <p class="muted">
-          Published mobile games I contributed to through Unity development, Firebase, GameAnalytics,
-          AdMob, achievement systems, monetization and production support.
+
+          Commercial mobile games and released projects I worked on,
+          including my own published game under Beximo Games.
+
         </p>
+
+
       </div>
-      <div class="cards" id="publishedCards"></div>
+
+
+      <div
+        class="cards"
+        id="publishedCards">
+      </div>
+
+
     </section>
 
-    <section class="section" id="other">
+
+
+    <!-- ==============================
+         OTHER PROJECTS
+    ============================== -->
+
+    <section
+      class="section"
+      id="other">
+
+
       <div class="section-head">
+
+
         <div>
-          <div class="eyebrow">Other Work</div>
-          <h3>Other Projects</h3>
+
+          <div class="eyebrow">
+            Other Work
+          </div>
+
+          <h3>
+            Other Projects
+          </h3>
+
         </div>
+
+
         <p class="muted">
-          Additional work including mobile projects, multiplayer/NFT systems, VR implementation
-          and teaser/gameplay production.
+
+          Multiplayer, WebGL, VR, prototype and production work
+          across different Unity projects.
+
         </p>
+
+
       </div>
-      <div class="cards" id="otherCards"></div>
+
+
+      <div
+        class="cards"
+        id="otherCards">
+      </div>
+
+
     </section>
 
-    <section class="section" id="experience">
+
+
+    <!-- ==============================
+         EXPERIENCE
+    ============================== -->
+
+    <section
+      class="section"
+      id="experience">
+
+
       <div class="section-head">
+
+
         <div>
-          <div class="eyebrow">Experience</div>
-          <h3>Production Experience</h3>
+
+          <div class="eyebrow">
+            Experience
+          </div>
+
+          <h3>
+            Production Experience
+          </h3>
+
         </div>
+
+
         <p class="muted">
-          Practical Unity development experience across published mobile games, freelance projects,
-          educational mini games, backend-connected systems and gameplay production.
+
+          Experience across independent development,
+          published mobile games,
+          multiplayer production,
+          backend integration,
+          optimization and live operations.
+
         </p>
+
+
       </div>
+
+
 
       <div class="experience">
+
+
         <div class="xp">
-          <div class="eyebrow">Beximo Games • My Independent Team</div>
-          <h4>Founder / Unity Game Developer</h4>
-          <p class="meta">
-            Building and publishing my own games with Beximo Games, my independent game team. For Wonder Build,
-            I owned the Unity development and release pipeline across gameplay, progression, Firebase, cloud save,
-            authentication, achievements, ads, IAP, Addressables, Google Play and App Store publishing, plus ongoing
-            live production and technical support.
-          </p>
-          <div class="store-row">
-            <a class="store" href="https://play.google.com/store/apps/details?id=com.Beximo.WonderBuilder"
-              target="_blank" rel="noopener">Google Play</a>
-            <a class="store" href="https://apps.apple.com/tr/app/wonder-build-city-builder/id6803185511?l=tr"
-              target="_blank" rel="noopener">App Store</a>
+
+          <div class="eyebrow">
+            Beximo Games • Independent Team
           </div>
-        </div>
 
-        <div class="xp">
-          <div class="eyebrow">Gameogram</div>
-          <h4>Unity Game Developer</h4>
-          <p class="meta">
-            Developed and maintained published mobile card and dice games. Implemented gameplay features, LiveOps
-            content, Firebase Analytics, GameAnalytics, AdMob, achievement systems and monetization. Worked on crash
-            investigation, ANR reduction, bug fixing, performance optimization and production releases.
-          </p>
-        </div>
+          <h4>
+            Founder / Unity Game Developer
+          </h4>
 
-        <div class="xp">
-          <div class="eyebrow">SNG</div>
-          <h4>Unity Game Developer</h4>
           <p class="meta">
-            Developed and maintained published mobile card and dice games. Implemented gameplay features, LiveOps
-            content, Firebase Analytics, GameAnalytics, AdMob, achievement systems and monetization. Worked on crash
-            investigation, ANR reduction, bug fixing, performance optimization and production releases.
-          </p>
-        </div>
 
-        <div class="xp">
-          <div class="eyebrow">Freelance</div>
-          <h4>Unity Developer</h4>
-          <p class="meta">
-            Developed mobile games from prototype to production. Built gameplay systems, backend integrations using
-            Node.js and AWS, MMO-style kingdom-building mechanics, analytics, monetization, multiplayer features and
-            scalable game architectures.
+            Building and publishing original games under Beximo Games.
+
+            For Wonder Build, I handled the Unity development
+            and release pipeline including gameplay,
+            physics systems, progression,
+            Firebase integration,
+            authentication,
+            cloud save,
+            Firestore,
+            Google Play Games,
+            Game Center,
+            achievements,
+            AdMob,
+            Unity IAP,
+            Addressables,
+            Play Asset Delivery,
+            Android publishing,
+            iOS publishing
+            and ongoing production support.
+
           </p>
+
+
           <div class="store-row">
-            <a class="store"
-              href="https://play.google.com/store/apps/details?id=com.shadowcast.warriorofthewasteland&pcampaignid=web_share"
-              target="_blank" rel="noopener">Google Play</a>
-            <a class="store" href="https://apps.apple.com/tr/app/warrior-of-the-wasteland/id6476194527" target="_blank"
-              rel="noopener">App Store</a>
+
+            <a
+              class="store"
+              href="https://play.google.com/store/apps/details?id=com.Beximo.WonderBuilder"
+              target="_blank"
+              rel="noopener">
+
+              <img
+                src="images/GetItOnGooglePlay_Badge_Web_color_English.png"
+                alt="Get it on Google Play">
+
+            </a>
+
+
+            <a
+              class="store"
+              href="https://apps.apple.com/tr/app/wonder-build-city-builder/id6803185511?l=tr"
+              target="_blank"
+              rel="noopener">
+
+              <img
+                src="images/appstore.png"
+                alt="Download on the App Store">
+
+            </a>
+
           </div>
+
         </div>
 
-        <div class="xp">
-          <div class="eyebrow">MVS Games / TÜBİTAK</div>
-          <h4>Unity Developer</h4>
-          <p class="meta">
-            Developed educational mini games within TÜBİTAK-supported projects. Designed gameplay mechanics, interactive
-            learning experiences, UI systems and optimized gameplay flows for children.
-          </p>
-        </div>
+
 
         <div class="xp">
-          <div class="eyebrow">DuckFactory</div>
-          <h4>Unity Developer</h4>
+
+          <div class="eyebrow">
+            Gameogram
+          </div>
+
+          <h4>
+            Unity Game Developer
+          </h4>
+
           <p class="meta">
-            Developed mobile and multiplayer game features, gameplay systems, UI implementation and technical
-            integrations for Unity projects. Worked on bug fixing, performance optimization, production support and
-            multiplayer gameplay experiences.
+
+            Developed and maintained published mobile card
+            and dice games.
+
+            Worked on gameplay systems,
+            LiveOps,
+            Firebase Analytics,
+            GameAnalytics,
+            AdMob,
+            achievements,
+            monetization,
+            hybrid bot systems,
+            crash investigation,
+            ANR reduction,
+            bug fixing,
+            optimization
+            and production releases.
+
           </p>
+
         </div>
 
-        <div class="xp">
-          <div class="eyebrow">ARD Holding</div>
-          <h4>Unity Team Lead</h4>
-          <p class="meta">
-            Led Unity development across mobile, WebGL and VR projects while coordinating technical planning and
-            development tasks. Designed gameplay architecture, implemented multiplayer systems, reviewed code, optimized
-            production workflows and delivered scalable technical solutions from concept to release.
-          </p>
-        </div>
+
 
         <div class="xp">
-          <div class="eyebrow">NDG Studio</div>
-          <h4>Unity Developer</h4>
+
+          <div class="eyebrow">
+            SNG
+          </div>
+
+          <h4>
+            Unity Game Developer
+          </h4>
+
           <p class="meta">
-            Developed gameplay systems and mobile prototypes while creating production-ready teaser and gameplay videos.
-            Contributed to gameplay implementation, technical integrations and project presentations including Z-Ape.
+
+            Worked on published mobile card and dice games,
+            implementing gameplay features,
+            LiveOps systems,
+            analytics,
+            monetization,
+            achievements,
+            production fixes
+            and performance improvements.
+
           </p>
+
         </div>
+
+
+
+        <div class="xp">
+
+          <div class="eyebrow">
+            Freelance
+          </div>
+
+          <h4>
+            Unity Developer
+          </h4>
+
+          <p class="meta">
+
+            Developed mobile games from prototype to production.
+
+            Built gameplay systems,
+            multiplayer functionality,
+            scalable architecture,
+            MMO-style kingdom-building mechanics
+            and backend integrations using Node.js and AWS.
+
+          </p>
+
+
+          <div class="store-row">
+
+            <a
+              class="store"
+              href="https://play.google.com/store/apps/details?id=com.shadowcast.warriorofthewasteland"
+              target="_blank"
+              rel="noopener">
+
+              <img
+                src="images/GetItOnGooglePlay_Badge_Web_color_English.png"
+                alt="Get it on Google Play">
+
+            </a>
+
+
+            <a
+              class="store"
+              href="https://apps.apple.com/tr/app/warrior-of-the-wasteland/id6476194527"
+              target="_blank"
+              rel="noopener">
+
+              <img
+                src="images/appstore.png"
+                alt="Download on the App Store">
+
+            </a>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="xp">
+
+          <div class="eyebrow">
+            MVS Games / TÜBİTAK
+          </div>
+
+          <h4>
+            Unity Developer
+          </h4>
+
+          <p class="meta">
+
+            Developed educational mini games
+            for TÜBİTAK-supported projects,
+            including gameplay mechanics,
+            interactive learning systems,
+            UI and optimized gameplay flows.
+
+          </p>
+
+        </div>
+
+
+
+        <div class="xp">
+
+          <div class="eyebrow">
+            DuckFactory
+          </div>
+
+          <h4>
+            Unity Developer
+          </h4>
+
+          <p class="meta">
+
+            Developed mobile and multiplayer game features,
+            gameplay systems,
+            UI implementations
+            and technical integrations.
+
+            Contributed to multiplayer gameplay,
+            performance work,
+            production fixes
+            and technical support.
+
+          </p>
+
+        </div>
+
+
+
+        <div class="xp">
+
+          <div class="eyebrow">
+            ARD Holding
+          </div>
+
+          <h4>
+            Unity Team Lead
+          </h4>
+
+          <p class="meta">
+
+            Led Unity development across mobile,
+            WebGL and VR projects.
+
+            Worked on technical planning,
+            gameplay architecture,
+            multiplayer systems,
+            code review,
+            team coordination,
+            production workflows
+            and scalable technical solutions.
+
+          </p>
+
+        </div>
+
+
+
+        <div class="xp">
+
+          <div class="eyebrow">
+            NDG Studio
+          </div>
+
+          <h4>
+            Unity Developer
+          </h4>
+
+          <p class="meta">
+
+            Developed gameplay systems
+            and mobile prototypes
+            while also creating gameplay
+            and teaser videos
+            for project presentations,
+            including Z-Ape.
+
+          </p>
+
+        </div>
+
+
       </div>
+
+
     </section>
 
-    <section class="section" id="skills">
-      <div class="eyebrow">Stack</div>
-      <h3>Skills & Tools</h3>
-      <div class="skills">
-        <div class="skill">Unity</div>
-        <div class="skill">C#</div>
-        <div class="skill">Firebase</div>
-        <div class="skill">GameAnalytics</div>
-        <div class="skill">AdMob</div>
-        <div class="skill">Google Play Games</div>
-        <div class="skill">Game Center</div>
-        <div class="skill">Unity IAP</div>
-        <div class="skill">Node.js</div>
-        <div class="skill">AWS</div>
-        <div class="skill">Mobile Games</div>
-        <div class="skill">Multiplayer</div>
-        <div class="skill">NFT Systems</div>
-        <div class="skill">VR</div>
-        <div class="skill">Git</div>
+
+
+    <!-- ==============================
+         SKILLS
+    ============================== -->
+
+    <section
+      class="section"
+      id="skills">
+
+
+      <div class="section-head">
+
+        <div>
+
+          <div class="eyebrow">
+            Technical Stack
+          </div>
+
+          <h3>
+            Skills & Tools
+          </h3>
+
+        </div>
+
+
+        <p class="muted">
+
+          Technologies and production systems used across
+          published mobile games, multiplayer projects,
+          backend-connected systems and live products.
+
+        </p>
+
       </div>
+
+
+
+      <div class="skills-layout">
+
+
+        <!-- UNITY -->
+
+        <div class="skill-group">
+
+          <div class="skill-group-title">
+            Unity & Gameplay
+          </div>
+
+          <div class="skills">
+
+            <span class="skill">Unity</span>
+            <span class="skill">Unity 6</span>
+            <span class="skill">C#</span>
+
+            <span class="skill">URP</span>
+            <span class="skill">UGUI</span>
+            <span class="skill">Input System</span>
+
+            <span class="skill">Gameplay Systems</span>
+            <span class="skill">Game Architecture</span>
+            <span class="skill">State Machines</span>
+
+            <span class="skill">Physics Gameplay</span>
+            <span class="skill">Mobile Optimization</span>
+            <span class="skill">Performance Profiling</span>
+
+            <span class="skill">Addressables</span>
+            <span class="skill">Play Asset Delivery</span>
+
+            <span class="skill">Async Gameplay Flows</span>
+            <span class="skill">Data Persistence</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- MULTIPLAYER -->
+
+        <div class="skill-group">
+
+          <div class="skill-group-title">
+            Multiplayer & Networking
+          </div>
+
+          <div class="skills">
+
+            <span class="skill">Netcode for GameObjects</span>
+            <span class="skill">Unity Transport</span>
+
+            <span class="skill">Photon</span>
+
+            <span class="skill">Client / Server Architecture</span>
+            <span class="skill">Server Authority</span>
+
+            <span class="skill">RPC Systems</span>
+            <span class="skill">NetworkVariables</span>
+
+            <span class="skill">Player Synchronization</span>
+            <span class="skill">Networked Gameplay</span>
+
+            <span class="skill">Matchmaking Flow</span>
+            <span class="skill">Match Lifecycle</span>
+
+            <span class="skill">Ready Handshake</span>
+
+            <span class="skill">Reconnect Systems</span>
+            <span class="skill">Session Management</span>
+
+            <span class="skill">Host / Client Flow</span>
+
+            <span class="skill">Mobile Multiplayer</span>
+            <span class="skill">WebGL Multiplayer</span>
+
+            <span class="skill">Network Testing</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- MOBILE -->
+
+        <div class="skill-group">
+
+          <div class="skill-group-title">
+            Mobile & Publishing
+          </div>
+
+          <div class="skills">
+
+            <span class="skill">Android</span>
+            <span class="skill">iOS</span>
+
+            <span class="skill">Google Play Console</span>
+            <span class="skill">App Store Connect</span>
+
+            <span class="skill">TestFlight</span>
+
+            <span class="skill">Google Play Games</span>
+            <span class="skill">Game Center</span>
+
+            <span class="skill">Achievements</span>
+            <span class="skill">Leaderboards</span>
+
+            <span class="skill">Unity IAP</span>
+            <span class="skill">AdMob</span>
+
+            <span class="skill">Android App Bundles</span>
+            <span class="skill">Play Asset Delivery</span>
+
+            <span class="skill">iOS Release Pipeline</span>
+            <span class="skill">Android Release Pipeline</span>
+
+            <span class="skill">Store Publishing</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- FIREBASE -->
+
+        <div class="skill-group">
+
+          <div class="skill-group-title">
+            Firebase & Cloud Systems
+          </div>
+
+          <div class="skills">
+
+            <span class="skill">Firebase</span>
+
+            <span class="skill">Firebase Authentication</span>
+
+            <span class="skill">Cloud Firestore</span>
+
+            <span class="skill">Firebase Analytics</span>
+
+            <span class="skill">Firebase Cloud Messaging</span>
+
+            <span class="skill">Cloud Save</span>
+
+            <span class="skill">Firestore Security Rules</span>
+
+            <span class="skill">Remote Content</span>
+
+            <span class="skill">Content Synchronization</span>
+
+            <span class="skill">Incremental Sync</span>
+
+            <span class="skill">Offline Cache</span>
+
+            <span class="skill">Offline-First Systems</span>
+
+            <span class="skill">Data Versioning</span>
+
+            <span class="skill">Player Persistence</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- BACKEND -->
+
+        <div class="skill-group">
+
+          <div class="skill-group-title">
+            Backend & Integration
+          </div>
+
+          <div class="skills">
+
+            <span class="skill">Node.js</span>
+
+            <span class="skill">AWS</span>
+
+            <span class="skill">REST APIs</span>
+
+            <span class="skill">JSON</span>
+
+            <span class="skill">Backend Integration</span>
+
+            <span class="skill">Authentication Flows</span>
+
+            <span class="skill">Cloud Data</span>
+
+            <span class="skill">Remote Configuration</span>
+
+            <span class="skill">Content Pipelines</span>
+
+            <span class="skill">Admin Tools</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ARCHITECTURE -->
+
+        <div class="skill-group">
+
+          <div class="skill-group-title">
+            Architecture & Code Design
+          </div>
+
+          <div class="skills">
+
+            <span class="skill">Clean Architecture</span>
+
+            <span class="skill">Ports & Adapters</span>
+
+            <span class="skill">Domain Layer</span>
+
+            <span class="skill">Application Layer</span>
+
+            <span class="skill">Infrastructure Layer</span>
+
+            <span class="skill">Presentation Layer</span>
+
+            <span class="skill">Separation of Concerns</span>
+
+            <span class="skill">Dependency Boundaries</span>
+
+            <span class="skill">State Management</span>
+
+            <span class="skill">Data Models</span>
+
+            <span class="skill">Service Architecture</span>
+
+            <span class="skill">Scalable Game Architecture</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- TESTING -->
+
+        <div class="skill-group">
+
+          <div class="skill-group-title">
+            Testing & Reliability
+          </div>
+
+          <div class="skills">
+
+            <span class="skill">Unity Test Framework</span>
+
+            <span class="skill">Automated Tests</span>
+
+            <span class="skill">EditMode Tests</span>
+
+            <span class="skill">PlayMode Tests</span>
+
+            <span class="skill">Domain Tests</span>
+
+            <span class="skill">Integration Tests</span>
+
+            <span class="skill">Regression Testing</span>
+
+            <span class="skill">Bug Investigation</span>
+
+            <span class="skill">Crash Investigation</span>
+
+            <span class="skill">ANR Investigation</span>
+
+            <span class="skill">Performance Testing</span>
+
+            <span class="skill">Device Testing</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- LIVE OPS -->
+
+        <div class="skill-group">
+
+          <div class="skill-group-title">
+            Analytics & Live Production
+          </div>
+
+          <div class="skills">
+
+            <span class="skill">GameAnalytics</span>
+
+            <span class="skill">Firebase Analytics</span>
+
+            <span class="skill">LiveOps</span>
+
+            <span class="skill">Monetization</span>
+
+            <span class="skill">Ad Integration</span>
+
+            <span class="skill">In-App Purchases</span>
+
+            <span class="skill">Player Progression</span>
+
+            <span class="skill">Economy Systems</span>
+
+            <span class="skill">Daily Rewards</span>
+
+            <span class="skill">Achievements</span>
+
+            <span class="skill">Production Support</span>
+
+            <span class="skill">Post-Launch Updates</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- TOOLS -->
+
+        <div class="skill-group">
+
+          <div class="skill-group-title">
+            Development Tools
+          </div>
+
+          <div class="skills">
+
+            <span class="skill">Git</span>
+
+            <span class="skill">GitHub</span>
+
+            <span class="skill">GitLab</span>
+
+            <span class="skill">Git LFS</span>
+
+            <span class="skill">WebGL</span>
+
+            <span class="skill">VR</span>
+
+            <span class="skill">NFT Integration</span>
+
+            <span class="skill">Unity Package Manager</span>
+
+            <span class="skill">Unity Profiler</span>
+
+            <span class="skill">Build Pipelines</span>
+
+            <span class="skill">Debugging</span>
+
+            <span class="skill">Version Control</span>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
     </section>
 
-    <section class="foot" id="contact">
-      <h3>Let’s build games.</h3>
-      <p class="muted">Available for Unity game developer roles and mobile game projects.</p>
 
-      <div class="email-box" id="emailText">iskendersivaz205@gmail.com</div>
+
+    <!-- ==============================
+         CONTACT
+    ============================== -->
+
+    <section
+      class="foot"
+      id="contact">
+
+
+      <div class="eyebrow">
+        Contact
+      </div>
+
+
+      <h3>
+        Let’s build games.
+      </h3>
+
+
+      <p class="muted">
+
+        Available for Unity Game Developer roles,
+        freelance projects
+        and mobile game development opportunities.
+
+      </p>
+
+
+      <div
+        class="email-box"
+        id="emailText">
+
+        iskendersivaz205@gmail.com
+
+      </div>
+
 
       <div class="contact-actions">
-        <button class="btn primary" type="button" onclick="copyEmail()">Copy Email</button>
-        <a class="btn" href="https://www.linkedin.com/in/iskender-sivaz-2a14211b0/" target="_blank"
-          rel="noopener">LinkedIn</a>
-        <a class="btn" href="https://github.com/iskender-ctrl" target="_blank" rel="noopener">GitHub</a>
+
+
+        <button
+          class="btn primary"
+          type="button"
+          onclick="copyEmail()">
+
+          Copy Email
+
+        </button>
+
+
+        <a
+          class="btn"
+          href="https://www.linkedin.com/in/iskender-sivaz-2a14211b0/"
+          target="_blank"
+          rel="noopener">
+
+          LinkedIn
+
+        </a>
+
+
+        <a
+          class="btn"
+          href="https://github.com/iskender-ctrl"
+          target="_blank"
+          rel="noopener">
+
+          GitHub
+
+        </a>
+
+
       </div>
 
-      <div class="copy-status" id="copyStatus"></div>
+
+      <div
+        class="copy-status"
+        id="copyStatus">
+      </div>
+
+
     </section>
+
+
   </main>
 
+
+
   <script>
-    const gpIcon = `<svg viewBox="0 0 24 24"><path fill="#35f5e6" d="M3 2l13.5 10L3 22V2z"/><path fill="#ffd45c" d="M16.5 12L20 14.6c1.3-1 1.3-4.2 0-5.2L16.5 12z"/></svg>`;
-    const appIcon = `<svg viewBox="0 0 24 24"><path fill="#fff" d="M16.4 13.1c0-2.2 1.8-3.3 1.9-3.4-1.1-1.5-2.7-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.5 0-2.9.9-3.7 2.2-1.6 2.8-.4 7 1.1 9.2.8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.2-2.5 1.2-2.6 0 0-2.6-1-2.6-3.7zM14.2 6.5c.6-.8 1.1-1.8 1-2.9-1 .1-2 .7-2.7 1.5-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.3z"/></svg>`;
+
+
+    /* ==============================
+       STORE BADGES
+    ============================== */
+
+    const GOOGLE_PLAY_BADGE =
+      "images/GetItOnGooglePlay_Badge_Web_color_English.png";
+
+    const APP_STORE_BADGE =
+      "images/appstore.png";
+
+
+
+    /* ==============================
+       PUBLISHED PROJECTS
+    ============================== */
 
     const published = [
+
+
       {
-        title: "Wonder Build",
-        category: "Mobile Casual / Physics City Builder",
-        company: "Beximo Games — My independent game team",
-        content: "Created and published Wonder Build under Beximo Games, my own independent game team. I handled the Unity development and production pipeline end-to-end, including gameplay systems, progression, Firebase services, cloud save, Google Play Games / Game Center integration, achievements, AdMob, Unity IAP, Addressables, Android Play Asset Delivery, iOS release work and live production support.",
-        image: "images/WonderBuild.png",
-        videos: ["videos/WonderBuild1.mp4", "videos/WonderBuild2.mp4", "videos/WonderBuild3.mp4"],
-        play: "https://play.google.com/store/apps/details?id=com.Beximo.WonderBuilder",
-        app: "https://apps.apple.com/tr/app/wonder-build-city-builder/id6803185511?l=tr",
+        title:
+          "Wonder Build",
+
+        category:
+          "Mobile Casual / Physics City Builder",
+
+        company:
+          "Beximo Games — My Independent Team",
+
+        content:
+          "Created and published Wonder Build under Beximo Games. I handled the Unity development and production pipeline end-to-end, including gameplay and physics systems, progression, Firebase authentication, cloud save, Firestore integration, Google Play Games, Game Center, achievements, AdMob, Unity IAP, Addressables, Android Play Asset Delivery, Android and iOS publishing, store releases and ongoing technical support.",
+
+        image:
+          "images/banner.png",
+
+        videos: [
+          "videos/WonderBuild1.mp4",
+          "videos/WonderBuild2.mp4",
+          "videos/WonderBuild3.mp4"
+        ],
+
+        play:
+          "https://play.google.com/store/apps/details?id=com.Beximo.WonderBuilder",
+
+        app:
+          "https://apps.apple.com/tr/app/wonder-build-city-builder/id6803185511?l=tr",
+
         tags: [
           "Unity",
           "C#",
           "Beximo Games",
-          "Indie Team",
           "Firebase",
+          "Firestore",
           "Cloud Save",
           "AdMob",
           "Unity IAP",
           "Addressables",
+          "Play Asset Delivery",
           "Google Play Games",
           "Game Center",
           "iOS",
           "Android"
         ]
       },
+
+
       {
-        title: "Fish Yatzy",
-        category: "Mobile Board / Dice Game",
-        company: "Gameogram",
-        content: "Developed gameplay systems, LiveOps features and a hybrid AI/Bot system for a published mobile game. Integrated Firebase Analytics, GameAnalytics, AdMob, achievement systems and monetization features. Investigated ANR/Crash reports, optimized game stability, improved player retention and supported post-launch production.",
-        image: "images/fish.png",
-        video: "videos/fish-yatzy.mp4",
-        play: "https://play.google.com/store/apps/details?id=com.gameogram.fishyatzy&pcampaignid=web_share",
-        app: "https://apps.apple.com/tr/app/fish-yatzy/id6535686968?l=tr",
+        title:
+          "Fish Yatzy",
+
+        category:
+          "Mobile Board / Dice Game",
+
+        company:
+          "Gameogram",
+
+        content:
+          "Developed gameplay systems, LiveOps features and a hybrid AI / bot system for a published mobile game. Integrated Firebase Analytics, GameAnalytics, AdMob, achievement systems and monetization. Investigated ANRs and crashes, improved stability and supported production releases.",
+
+        image:
+          "images/fish.png",
+
+        video:
+          "videos/fish-yatzy.mp4",
+
+        play:
+          "https://play.google.com/store/apps/details?id=com.gameogram.fishyatzy",
+
+        app:
+          "https://apps.apple.com/tr/app/fish-yatzy/id6535686968?l=tr",
+
         tags: [
           "Unity",
           "C#",
@@ -1042,18 +2588,37 @@
           "GameAnalytics",
           "AdMob",
           "Analytics",
-          "Monetization"
+          "Monetization",
+          "Optimization"
         ]
       },
+
+
       {
-        title: "Cribbage",
-        category: "Mobile Card Game",
-        company: "SNG",
-        content: "Implemented gameplay systems, LiveOps content and analytics integrations for a published card game. Worked with Firebase Analytics, GameAnalytics, AdMob, achievement systems, bug fixing, crash investigation, performance optimization and production support.",
-        image: "images/cribbage.png",
-        video: "videos/cribbage.mp4",
-        play: "https://play.google.com/store/apps/details?id=com.sngict.Cribbage&pcampaignid=web_share",
-        app: "https://apps.apple.com/tr/app/cribbage-offline-card-game/id6448262470?l=tr",
+        title:
+          "Cribbage",
+
+        category:
+          "Mobile Card Game",
+
+        company:
+          "SNG",
+
+        content:
+          "Implemented gameplay systems, LiveOps content and analytics integrations for a published card game. Worked with Firebase Analytics, GameAnalytics, AdMob, achievement systems, production bug fixing, crash investigation and performance optimization.",
+
+        image:
+          "images/cribbage.png",
+
+        video:
+          "videos/cribbage.mp4",
+
+        play:
+          "https://play.google.com/store/apps/details?id=com.sngict.Cribbage",
+
+        app:
+          "https://apps.apple.com/tr/app/cribbage-offline-card-game/id6448262470?l=tr",
+
         tags: [
           "Unity",
           "C#",
@@ -1061,37 +2626,74 @@
           "Firebase",
           "GameAnalytics",
           "AdMob",
+          "Achievements",
           "Optimization"
         ]
       },
+
+
       {
-        title: "Yatzy Classic",
-        category: "Mobile Dice Game",
-        company: "SNG",
-        content: "Contributed to gameplay development, LiveOps updates and production support for a published dice game. Integrated analytics, monetization and achievement systems while improving stability, fixing production issues and optimizing performance.",
-        image: "images/yatzyclassic.png",
-        video: "videos/yatzyclassic.mp4",
-        play: "https://play.google.com/store/apps/details?id=com.sng.yatzy&pcampaignid=web_share",
-        app: "https://apps.apple.com/tr/app/yatzy-classic-fun-dice-games/id6740270720?l=tr",
+        title:
+          "Yatzy Classic",
+
+        category:
+          "Mobile Dice Game",
+
+        company:
+          "SNG",
+
+        content:
+          "Contributed to gameplay development, LiveOps updates and production support for a published dice game. Integrated analytics, monetization and achievement systems while improving stability, fixing production issues and optimizing performance.",
+
+        image:
+          "images/yatzyclassic.png",
+
+        video:
+          "videos/yatzyclassic.mp4",
+
+        play:
+          "https://play.google.com/store/apps/details?id=com.sng.yatzy",
+
+        app:
+          "https://apps.apple.com/tr/app/yatzy-classic-fun-dice-games/id6740270720?l=tr",
+
         tags: [
           "Unity",
           "C#",
           "LiveOps",
           "Firebase",
-          "GameAnalytics",
+          "Analytics",
           "Monetization",
           "Performance"
         ]
       },
+
+
       {
-        title: "Tonk Classic",
-        category: "Mobile Card Game",
-        company: "SNG",
-        content: "Implemented gameplay improvements, UI flows and LiveOps features for a published mobile card game. Integrated analytics and monetization systems while supporting production releases, bug fixing and performance optimization.",
-        image: "images/tonk.png",
-        video: null,
-        play: null,
-        app: "https://apps.apple.com/tr/app/tonk-classic-card-game/id6444026424?l=tr",
+        title:
+          "Tonk Classic",
+
+        category:
+          "Mobile Card Game",
+
+        company:
+          "SNG",
+
+        content:
+          "Implemented gameplay improvements, UI flows and LiveOps features for a published mobile card game. Integrated analytics and monetization systems while supporting releases, bug fixing and performance optimization.",
+
+        image:
+          "images/tonk.png",
+
+        video:
+          null,
+
+        play:
+          null,
+
+        app:
+          "https://apps.apple.com/tr/app/tonk-classic-card-game/id6444026424?l=tr",
+
         tags: [
           "Unity",
           "C#",
@@ -1101,17 +2703,36 @@
           "Optimization"
         ]
       },
+
+
       {
-        title: "Warrior of the Wasteland",
-        category: "Mobile Strategy / Kingdom Builder",
-        company: "Freelance",
-        content: "Developed gameplay systems and backend integrations using Node.js and AWS for an online kingdom-building strategy game. Implemented MMO-style mechanics, analytics, monetization and production-ready multiplayer systems.",
-        image: null,
-        video: null,
-        play: "https://play.google.com/store/apps/details?id=com.shadowcast.warriorofthewasteland&pcampaignid=web_share",
-        app: "https://apps.apple.com/tr/app/warrior-of-the-wasteland/id6476194527",
+        title:
+          "Warrior of the Wasteland",
+
+        category:
+          "Mobile Strategy / Kingdom Builder",
+
+        company:
+          "Freelance",
+
+        content:
+          "Developed gameplay systems and backend integrations using Node.js and AWS for an online kingdom-building strategy game. Implemented MMO-style mechanics, backend-connected systems, analytics, monetization and multiplayer gameplay functionality.",
+
+        image:
+          null,
+
+        video:
+          null,
+
+        play:
+          "https://play.google.com/store/apps/details?id=com.shadowcast.warriorofthewasteland",
+
+        app:
+          "https://apps.apple.com/tr/app/warrior-of-the-wasteland/id6476194527",
+
         tags: [
           "Unity",
+          "C#",
           "Node.js",
           "AWS",
           "Backend",
@@ -1119,219 +2740,864 @@
           "Strategy"
         ]
       }
+
     ];
+
+
+
+    /* ==============================
+       OTHER WORK
+    ============================== */
 
     const other = [
+
+
       {
-        title: "Hard Run",
-        category: "WebGL Multiplayer Project",
-        company: "ARD",
-        content: "Developed a WebGL multiplayer game for browser gameplay, including Photon networking, NFT integration work, real-time multiplayer gameplay systems, gameplay mechanics, synchronization, networking architecture and WebGL-specific production support.",
-        video: "videos/hardrun.mp4",
-        tags: ["Unity", "WebGL", "Photon", "Multiplayer", "NFT", "Networking", "Browser Game"]
+        title:
+          "Hard Run",
+
+        category:
+          "WebGL Multiplayer Project",
+
+        company:
+          "ARD",
+
+        content:
+          "Developed a WebGL multiplayer game using Photon, including real-time networking, player synchronization, gameplay mechanics, networking architecture, NFT integration work and WebGL-specific production support.",
+
+        video:
+          "videos/hardrun.mp4",
+
+        tags: [
+          "Unity",
+          "WebGL",
+          "Photon",
+          "Multiplayer",
+          "Networking",
+          "NFT",
+          "Browser Game"
+        ]
       },
+
+
       {
-        title: "VR Project",
-        category: "VR Implementation",
-        company: "ARD",
-        content: "VR-focused implementation work. My contribution was focused on the VR side of the project.",
-        video: "videos/vr-project.mp4",
-        tags: ["Unity", "VR", "Gameplay"]
+        title:
+          "VR Project",
+
+        category:
+          "VR Implementation",
+
+        company:
+          "ARD",
+
+        content:
+          "Worked on the VR implementation side of the project, including Unity-based VR gameplay and interaction systems.",
+
+        video:
+          "videos/vr-project.mp4",
+
+        tags: [
+          "Unity",
+          "VR",
+          "Gameplay",
+          "Interaction Systems"
+        ]
       },
+
+
       {
-        title: "Tight Guys",
-        category: "Mobile Multiplayer Project",
-        company: "ARD",
-        content: "Developed a mobile multiplayer game using Photon, including real-time networking, gameplay systems, player synchronization, multiplayer architecture and gameplay presentation.",
-        video: "videos/tight-guys.mp4",
-        tags: ["Unity", "Mobile", "Photon", "Multiplayer", "Networking", "Gameplay"]
+        title:
+          "Tight Guys",
+
+        category:
+          "Mobile Multiplayer Project",
+
+        company:
+          "ARD",
+
+        content:
+          "Developed a mobile multiplayer game using Photon, including real-time networking, gameplay systems, player synchronization and multiplayer architecture.",
+
+        video:
+          "videos/tight-guys.mp4",
+
+        tags: [
+          "Unity",
+          "Mobile",
+          "Photon",
+          "Multiplayer",
+          "Networking",
+          "Gameplay"
+        ]
       },
+
+
       {
-        title: "Z-Ape",
-        category: "Unpublished Teaser",
-        company: "NDG Studio",
-        content: "Unpublished project teaser/gameplay video. The teaser shown here was created by me.",
-        video: "videos/Z-Ape_Raid_Trailer.mp4",
-        tags: ["Unity", "Teaser", "Gameplay Capture"]
+        title:
+          "Z-Ape",
+
+        category:
+          "Unpublished Teaser",
+
+        company:
+          "NDG Studio",
+
+        content:
+          "Unpublished project gameplay and teaser work. The teaser shown here was created by me.",
+
+        video:
+          "videos/Z-Ape_Raid_Trailer.mp4",
+
+        tags: [
+          "Unity",
+          "Gameplay",
+          "Gameplay Capture",
+          "Teaser Production"
+        ]
       }
+
     ];
 
+
+
+    /* ==============================
+       STORE BUTTONS
+    ============================== */
+
     function storeButtons(g) {
-      let s = '<div class="store-row">';
-      if (g.play) s += `<a class="store" href="${g.play}" target="_blank" rel="noopener">${gpIcon} Google Play</a>`;
-      if (g.app) s += `<a class="store" href="${g.app}" target="_blank" rel="noopener">${appIcon} App Store</a>`;
-      return s + '</div>';
+
+      if (!g.play && !g.app) {
+        return "";
+      }
+
+      let html =
+        '<div class="store-row">';
+
+
+      if (g.play) {
+
+        html += `
+          <a
+            class="store"
+            href="${g.play}"
+            target="_blank"
+            rel="noopener">
+
+            <img
+              src="${GOOGLE_PLAY_BADGE}"
+              alt="Get it on Google Play">
+
+          </a>
+        `;
+
+      }
+
+
+      if (g.app) {
+
+        html += `
+          <a
+            class="store"
+            href="${g.app}"
+            target="_blank"
+            rel="noopener">
+
+            <img
+              src="${APP_STORE_BADGE}"
+              alt="Download on the App Store">
+
+          </a>
+        `;
+
+      }
+
+
+      html += '</div>';
+
+      return html;
+
     }
+
+
+
+    /* ==============================
+       TAGS
+    ============================== */
 
     function tags(g) {
-      return `<div class="tags">${g.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>`;
+
+      if (!g.tags || !g.tags.length) {
+        return "";
+      }
+
+      return `
+        <div class="tags">
+          ${g.tags
+            .map(
+              tag =>
+                `<span class="tag">${tag}</span>`
+            )
+            .join("")}
+        </div>
+      `;
+
     }
 
-    function renderVideoSection(g, key) {
-      const videos = Array.isArray(g.videos) && g.videos.length
-        ? g.videos
-        : (g.video ? [g.video] : []);
 
-      if (!videos.length) return "";
+
+    /* ==============================
+       VIDEOS
+    ============================== */
+
+    function renderVideoSection(
+      g,
+      key
+    ) {
+
+      const videos =
+        Array.isArray(g.videos) &&
+        g.videos.length
+          ? g.videos
+          : g.video
+            ? [g.video]
+            : [];
+
+
+      if (!videos.length) {
+        return "";
+      }
+
 
       if (videos.length === 1) {
-        return `<div class="video-box"><video controls preload="metadata" playsinline src="${videos[0]}"></video></div>`;
+
+        return `
+          <div class="video-box">
+
+            <video
+              controls
+              preload="metadata"
+              playsinline
+              src="${videos[0]}">
+            </video>
+
+          </div>
+        `;
+
       }
 
+
       return `
-      <div class="video-carousel" data-carousel="${key}" data-videos='${JSON.stringify(videos)}'>
-        <div class="carousel-toolbar">
-          <div class="carousel-counter"><span class="current-video">1</span> / <span class="total-video">${videos.length}</span> videos</div>
-          <div class="carousel-nav">
-            <button class="carousel-btn" type="button" data-action="prev">◀ Prev</button>
-            <button class="carousel-btn" type="button" data-action="next">Next ▶</button>
+        <div
+          class="video-carousel"
+          data-carousel="${key}"
+          data-videos='${JSON.stringify(videos)}'>
+
+
+          <div class="carousel-toolbar">
+
+
+            <div class="carousel-counter">
+
+              <span class="current-video">
+                1
+              </span>
+
+              /
+
+              <span class="total-video">
+                ${videos.length}
+              </span>
+
+              videos
+
+            </div>
+
+
+            <div class="carousel-nav">
+
+
+              <button
+                class="carousel-btn"
+                type="button"
+                data-action="prev">
+
+                ◀ Prev
+
+              </button>
+
+
+              <button
+                class="carousel-btn"
+                type="button"
+                data-action="next">
+
+                Next ▶
+
+              </button>
+
+
+            </div>
+
+
           </div>
+
+
+          <div class="video-box">
+
+            <video
+              controls
+              preload="metadata"
+              playsinline
+              src="${videos[0]}">
+            </video>
+
+          </div>
+
+
         </div>
-        <div class="video-box">
-          <video controls preload="metadata" playsinline src="${videos[0]}"></video>
-        </div>
-      </div>`;
+      `;
+
     }
+
+
+
+    /* ==============================
+       POSTER
+    ============================== */
 
     function poster(g) {
+
       if (g.image) {
+
         return `
-      <div class="poster">
-        <img src="${g.image}" alt="${g.title} image">
-        <span class="badge">Published</span>
-      </div>
-    `;
+          <div class="poster">
+
+            <img
+              src="${g.image}"
+              alt="${g.title}">
+
+            <span class="badge">
+              Published
+            </span>
+
+          </div>
+        `;
+
       }
 
+
       return `
-    <div class="poster">
-      <span class="badge">Published</span>
-      <div class="muted" style="text-align:center;padding:24px">
-        <b>${g.title}</b><br>Store project links available below.
-      </div>
-    </div>
-  `;
+        <div class="poster">
+
+          <span class="badge">
+            Published
+          </span>
+
+          <div
+            class="muted"
+            style="
+              padding:30px;
+              text-align:center;
+            ">
+
+            <strong>
+              ${g.title}
+            </strong>
+
+            <br><br>
+
+            Available on mobile stores.
+
+          </div>
+
+        </div>
+      `;
+
     }
 
-    function publishedCard(g, index) {
+
+
+    /* ==============================
+       PUBLISHED CARD
+    ============================== */
+
+    function publishedCard(
+      g,
+      index
+    ) {
+
       return `
-    <article class="card">
-      ${poster(g)}
-      <div class="label">${g.category}</div>
-      <h4>${g.title}</h4>
-      <p class="meta"><b>Company:</b> ${g.company}<br><b>Contribution:</b> ${g.content}</p>
-      ${storeButtons(g)}
-      ${renderVideoSection(g, `published-${index}`)}
-      ${tags(g)}
-    </article>
-  `;
+        <article class="card">
+
+          ${poster(g)}
+
+          <div class="label">
+            ${g.category}
+          </div>
+
+          <h4>
+            ${g.title}
+          </h4>
+
+          <p class="meta">
+
+            <b>
+              Company:
+            </b>
+
+            ${g.company}
+
+            <br>
+
+            <b>
+              Contribution:
+            </b>
+
+            ${g.content}
+
+          </p>
+
+          ${storeButtons(g)}
+
+          ${renderVideoSection(
+            g,
+            `published-${index}`
+          )}
+
+          ${tags(g)}
+
+        </article>
+      `;
+
     }
 
-    function otherCard(g, index) {
+
+
+    /* ==============================
+       OTHER CARD
+    ============================== */
+
+    function otherCard(
+      g,
+      index
+    ) {
+
       return `
-    <article class="card">
-      ${renderVideoSection(g, `other-${index}`)}
-      <div class="label">${g.category}</div>
-      <h4>${g.title}</h4>
-      <p class="meta"><b>Company:</b> ${g.company}<br><b>Contribution:</b> ${g.content}</p>
-      ${tags(g)}
-    </article>
-  `;
+        <article class="card">
+
+          ${renderVideoSection(
+            g,
+            `other-${index}`
+          )}
+
+          <div class="label">
+            ${g.category}
+          </div>
+
+          <h4>
+            ${g.title}
+          </h4>
+
+          <p class="meta">
+
+            <b>
+              Company:
+            </b>
+
+            ${g.company}
+
+            <br>
+
+            <b>
+              Contribution:
+            </b>
+
+            ${g.content}
+
+          </p>
+
+          ${tags(g)}
+
+        </article>
+      `;
+
     }
+
+
+
+    /* ==============================
+       COPY EMAIL
+    ============================== */
 
     function copyEmail() {
-      const email = "iskendersivaz9697@gmail.com";
-      const status = document.getElementById("copyStatus");
 
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(email).then(() => {
-          status.textContent = "Email copied.";
-        }).catch(() => {
-          fallbackCopy(email, status);
-        });
-      } else {
-        fallbackCopy(email, status);
+      const email =
+        "iskendersivaz205@gmail.com";
+
+      const status =
+        document.getElementById(
+          "copyStatus"
+        );
+
+
+      if (
+        navigator.clipboard &&
+        window.isSecureContext
+      ) {
+
+        navigator.clipboard
+          .writeText(email)
+
+          .then(() => {
+
+            status.textContent =
+              "Email copied.";
+
+          })
+
+          .catch(() => {
+
+            fallbackCopy(
+              email,
+              status
+            );
+
+          });
+
       }
+
+      else {
+
+        fallbackCopy(
+          email,
+          status
+        );
+
+      }
+
     }
 
-    function fallbackCopy(text, status) {
-      const area = document.createElement("textarea");
-      area.value = text;
-      area.style.position = "fixed";
-      area.style.opacity = "0";
-      document.body.appendChild(area);
+
+
+    function fallbackCopy(
+      text,
+      status
+    ) {
+
+      const area =
+        document.createElement(
+          "textarea"
+        );
+
+      area.value =
+        text;
+
+      area.style.position =
+        "fixed";
+
+      area.style.opacity =
+        "0";
+
+      document.body
+        .appendChild(area);
+
       area.focus();
+
       area.select();
 
+
       try {
-        document.execCommand("copy");
-        status.textContent = "Email copied.";
-      } catch (e) {
-        status.textContent = "Email: " + text;
+
+        document.execCommand(
+          "copy"
+        );
+
+        status.textContent =
+          "Email copied.";
+
       }
 
-      document.body.removeChild(area);
+      catch (error) {
+
+        status.textContent =
+          "Email: " + text;
+
+      }
+
+
+      document.body
+        .removeChild(area);
+
     }
+
+
+
+    /* ==============================
+       VIDEO CAROUSEL
+    ============================== */
 
     function initVideoCarousels() {
-      document.querySelectorAll(".video-carousel").forEach((carousel) => {
-        const video = carousel.querySelector("video");
-        const currentLabel = carousel.querySelector(".current-video");
-        const videos = JSON.parse(carousel.dataset.videos || "[]");
-        if (!video || !videos.length) return;
 
-        let index = 0;
-        let isSwitching = false;
+      document
+        .querySelectorAll(
+          ".video-carousel"
+        )
 
-        const playSafely = () => {
-          const playPromise = video.play();
-          if (playPromise && typeof playPromise.catch === "function") {
-            playPromise.catch(() => {});
+        .forEach(
+          carousel => {
+
+            const video =
+              carousel.querySelector(
+                "video"
+              );
+
+            const currentLabel =
+              carousel.querySelector(
+                ".current-video"
+              );
+
+            const videos =
+              JSON.parse(
+                carousel.dataset.videos ||
+                "[]"
+              );
+
+
+            if (
+              !video ||
+              !videos.length
+            ) {
+              return;
+            }
+
+
+            let index = 0;
+
+            let isSwitching =
+              false;
+
+
+            const playSafely =
+              () => {
+
+                const promise =
+                  video.play();
+
+                if (
+                  promise &&
+                  typeof promise.catch ===
+                    "function"
+                ) {
+
+                  promise.catch(
+                    () => {}
+                  );
+
+                }
+
+              };
+
+
+            const loadVideo =
+              (
+                nextIndex,
+                autoplay = true
+              ) => {
+
+                index =
+                  (
+                    nextIndex +
+                    videos.length
+                  )
+                  %
+                  videos.length;
+
+
+                isSwitching =
+                  true;
+
+
+                video.src =
+                  videos[index];
+
+                video.load();
+
+
+                currentLabel.textContent =
+                  String(
+                    index + 1
+                  );
+
+
+                const onReady =
+                  () => {
+
+                    if (autoplay) {
+                      playSafely();
+                    }
+
+                    isSwitching =
+                      false;
+
+                    video.removeEventListener(
+                      "canplay",
+                      onReady
+                    );
+
+                  };
+
+
+                video.addEventListener(
+                  "canplay",
+                  onReady
+                );
+
+              };
+
+
+            const advance =
+              () => {
+
+                if (isSwitching) {
+                  return;
+                }
+
+                loadVideo(
+                  index + 1,
+                  true
+                );
+
+              };
+
+
+            carousel
+              .querySelector(
+                '[data-action="prev"]'
+              )
+              ?.addEventListener(
+                "click",
+                () => {
+
+                  loadVideo(
+                    index - 1,
+                    true
+                  );
+
+                }
+              );
+
+
+            carousel
+              .querySelector(
+                '[data-action="next"]'
+              )
+              ?.addEventListener(
+                "click",
+                () => {
+
+                  loadVideo(
+                    index + 1,
+                    true
+                  );
+
+                }
+              );
+
+
+            video.addEventListener(
+              "ended",
+              advance
+            );
+
+
+            video.addEventListener(
+              "timeupdate",
+              () => {
+
+                if (isSwitching) {
+                  return;
+                }
+
+                if (
+                  !Number.isFinite(
+                    video.duration
+                  )
+                  ||
+                  video.duration <= 0
+                ) {
+                  return;
+                }
+
+                if (
+                  video.duration -
+                  video.currentTime
+                  <=
+                  0.08
+                ) {
+
+                  advance();
+
+                }
+
+              }
+            );
+
           }
-        };
+        );
 
-        const loadVideo = (nextIndex, autoplay = true) => {
-          index = (nextIndex + videos.length) % videos.length;
-          isSwitching = true;
-          video.src = videos[index];
-          video.load();
-          currentLabel.textContent = String(index + 1);
-
-          const onReady = () => {
-            if (autoplay) playSafely();
-            isSwitching = false;
-            video.removeEventListener("canplay", onReady);
-          };
-
-          video.addEventListener("canplay", onReady);
-        };
-
-        const advance = () => {
-          if (isSwitching) return;
-          loadVideo(index + 1, true);
-        };
-
-        carousel.querySelector('[data-action="prev"]')?.addEventListener("click", () => loadVideo(index - 1, true));
-        carousel.querySelector('[data-action="next"]')?.addEventListener("click", () => loadVideo(index + 1, true));
-
-        video.addEventListener("ended", advance);
-
-        // Small workaround for export glitches on the very last frames:
-        // jump to the next clip just before the broken tail frame becomes visible.
-        video.addEventListener("timeupdate", () => {
-          if (isSwitching) return;
-          if (!Number.isFinite(video.duration) || video.duration <= 0) return;
-          if (video.duration - video.currentTime <= 0.08) {
-            advance();
-          }
-        });
-      });
     }
 
-    document.getElementById("publishedCards").innerHTML = published.map((g, i) => publishedCard(g, i)).join("");
-    document.getElementById("otherCards").innerHTML = other.map((g, i) => otherCard(g, i)).join("");
+
+
+    /* ==============================
+       INITIAL RENDER
+    ============================== */
+
+    document
+      .getElementById(
+        "publishedCards"
+      )
+      .innerHTML =
+
+      published
+        .map(
+          (
+            game,
+            index
+          ) =>
+            publishedCard(
+              game,
+              index
+            )
+        )
+        .join("");
+
+
+    document
+      .getElementById(
+        "otherCards"
+      )
+      .innerHTML =
+
+      other
+        .map(
+          (
+            game,
+            index
+          ) =>
+            otherCard(
+              game,
+              index
+            )
+        )
+        .join("");
+
+
     initVideoCarousels();
+
   </script>
+
+
 </body>
 
 </html>
